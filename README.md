@@ -1,4 +1,4 @@
-# Simulator of collective behavior in ats
+# Simulator of collective behavior in ants
 
 To run simulations, set up your virtual environment and install dependencies from `requirements.txt`.
 
