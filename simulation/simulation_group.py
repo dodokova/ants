@@ -1,4 +1,4 @@
-from .simulation import Simulation
+from .simulation import Simulation, AntOrientationType
 from .threads_management import ProcessesManagement
 from save_results import draw_results
 from datetime import datetime
@@ -16,8 +16,7 @@ class SimulationHandler:
         simulation_name: str,
         number_of_steps: int,
         random_variable_values=None,
-        only_general_pheromone=False,
-        with_orientation=False,
+        ant_orientation_type=AntOrientationType.TWO_PHEROMONES,
     ):
         self.results_folder = results_folder
         self.props = props
@@ -25,8 +24,7 @@ class SimulationHandler:
         self.simulation_name = simulation_name
         self.number_of_steps = number_of_steps
         self.random_variable_values = random_variable_values
-        self.only_general_pheromone = only_general_pheromone
-        self.with_orientation = with_orientation
+        self.ant_orientation_type = ant_orientation_type
 
     def create_and_run_simulation(self):
         Simulation(
@@ -36,8 +34,7 @@ class SimulationHandler:
             simulation_folder_name=self.simulation_folder_name,
             simulation_name=self.simulation_name,
             results_folder=self.results_folder,
-            only_general_pheromone=self.only_general_pheromone,
-            with_orientation=self.with_orientation,
+            ant_orientation_type=self.ant_orientation_type,
         ).run_simulation()
 
 

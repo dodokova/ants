@@ -192,7 +192,7 @@ def draw_step(simulation_folder, drawing_folder_name, step, settings):
         draw,
         settings.ZOOM,
         settings.NUMERICAL_ARRAY_SIZE,
-        data.get("pheromone_a"),
+        pheromone_1=data.get("pheromone_a"),
         pheromone_2=data.get("pheromone_b"),
     )
     draw_foods(draw, data.get("foods"), settings, step)

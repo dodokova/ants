@@ -18,7 +18,7 @@ if __name__ == "__main__":
         results_folder=my_results_folder_dir,
         group_props=common_props,
         group_name="test_example",
-        number_of_steps=50,  # 1 step = 0.5 seconds
+        number_of_steps=300,  # 1 step = 0.5 seconds
         repetitions=3,  # number of simulations with the same settings
         max_processes=5,  # number of simulations running in parallel
     )

@@ -10,7 +10,7 @@ def draw_results(
     results_folder: str,
     number_of_steps: int,
     additional_settings: dict = {},
-    print_step_number: bool = False,
+    step_diff: int = 100,
 ):
     with open(f"{results_folder}/results/{simulation_name}/settings.py") as file:
         settings_from_file = json.loads(file.read())
@@ -21,13 +21,9 @@ def draw_results(
         results_folder + "/results/" + simulation_name + "/" + drawings_folder_name
     )
 
-    step_diff = 50
-
     steps = list(range(step_diff, number_of_steps + 1, step_diff))
 
     for step in steps:
-        if print_step_number:
-            print(simulation_name + ": Draw step " + str(step))
         draw_step(
             f"{results_folder}/results/{simulation_name}",
             drawings_folder_name,

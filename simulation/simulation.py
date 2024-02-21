@@ -11,6 +11,12 @@ from datetime import datetime
 from helper_functions import try_make_dir
 
 
+class AntOrientationType:
+    TWO_PHEROMONES = "two_pheromones"
+    ONE_PHEROMONE = "one_pheromone"
+    ONE_PHEROMONE_WITH_ORIENTATION = "one_pheromone_with_orientation"
+
+
 class Simulation:
     def __init__(
         self,
@@ -20,8 +26,7 @@ class Simulation:
         results_folder: str = None,
         simulation_folder_name: str = None,
         simulation_name: str = None,
-        only_general_pheromone: bool = False,
-        with_orientation: bool = False,
+        ant_orientation_type: str = AntOrientationType.TWO_PHEROMONES,
         save_pheromones_every_nth_step: int = 100,
     ):
         self.simulation_name = simulation_name
@@ -43,16 +48,21 @@ class Simulation:
                 0, 1, self.settings.ANTS_NUMBER * number_of_steps
             ).tolist()
 
-        if with_orientation:
+        if ant_orientation_type == AntOrientationType.ONE_PHEROMONE_WITH_ORIENTATION:
             self.ants = AntsWithOrientation(self.settings, self.random_variable_values)
         else:
             self.ants = AntsWithPheromones(self.settings, self.random_variable_values)
+
         self.foods = FoodSources(self.settings)
+
         self.nest = Nest(self.settings)
+
         self.pheromones = Pheromones(
             self.settings,
-            only_food_pheromone=with_orientation,
-            only_general_pheromone=only_general_pheromone,
+            only_food_pheromone=ant_orientation_type
+            == AntOrientationType.ONE_PHEROMONE_WITH_ORIENTATION,
+            only_general_pheromone=ant_orientation_type
+            == AntOrientationType.ONE_PHEROMONE,
         )
 
         self.results_manager.create_directories()
